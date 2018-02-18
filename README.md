@@ -10,8 +10,11 @@ Establishing an interface/protocol which coordinates the comunication between Vi
 # Libraries 
 ## Libraries 
 [Gson](https://github.com/google/gson):for serialization/deserialization
+
 [Retrofit](http://square.github.io/retrofit/):for web api interface
+
 *[ButterKnife](http://jakewharton.github.io/butterknife/):for views injection
+
 *[RxJava](https://github.com/ReactiveX/RxJava):for reactive functional programming
 *[Design Support Library](https://developer.android.com/training/material/design-library.html): to make use of the Recycler View
 
