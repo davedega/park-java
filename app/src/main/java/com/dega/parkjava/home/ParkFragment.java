@@ -1,4 +1,4 @@
-package com.dega.parkjava;
+package com.dega.parkjava.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,13 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dega.parkjava.R;
 import com.dega.parkjava.model.Vehicle;
 import com.dega.parkjava.model.VehiclesResponse;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -97,11 +98,12 @@ public class ParkFragment extends Fragment implements ParkContract.View {
     }
 
 
+    // The Adapter lives within the view since is the only class who access it
     class VehiclesAdapter extends RecyclerView.Adapter<VehiclesAdapter.VehicleViewHolder> {
 
         ArrayList<Vehicle> vehicles;
 
-        public VehiclesAdapter(ArrayList<Vehicle> vehicles) {
+        VehiclesAdapter(ArrayList<Vehicle> vehicles) {
             this.vehicles = vehicles;
         }
 
@@ -116,6 +118,7 @@ public class ParkFragment extends Fragment implements ParkContract.View {
         public void onBindViewHolder(VehicleViewHolder holder, int position) {
             Vehicle vehicle = vehicles.get(position);
             holder.setVehicleName(vehicle.getVrn());
+            holder.bind(vehicle, presenter);
         }
 
         @Override
@@ -125,14 +128,25 @@ public class ParkFragment extends Fragment implements ParkContract.View {
 
         class VehicleViewHolder extends RecyclerView.ViewHolder {
             TextView vehicleName;
+            LinearLayout vehicleItem;
 
             VehicleViewHolder(View itemView) {
                 super(itemView);
                 this.vehicleName = itemView.findViewById(R.id.vehicleName);
+                this.vehicleItem = itemView.findViewById(R.id.vehicleItem);
             }
 
             void setVehicleName(String vehicleName) {
                 this.vehicleName.setText(vehicleName);
+            }
+
+            void bind(final Vehicle vehicle, final ParkContract.Presenter presenter) {
+                vehicleItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showDetailInNewView(vehicle);
+                    }
+                });
             }
         }
     }
