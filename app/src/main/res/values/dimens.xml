@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main dimensions -->
+    <dimen name="logo_width">200dp</dimen>
+    <dimen name="logo_height">200dp</dimen>
+
+    <dimen name="list_item_heigth">70dp</dimen>
+    <dimen name="vehicle_name_list_item_margin">12dp</dimen>
+    <dimen name="arrow_list_item_width_heigth">50dp</dimen>
+    <dimen name="height_divider">0.3dp</dimen>
+
+</resources>

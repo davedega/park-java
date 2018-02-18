@@ -16,7 +16,9 @@ public class ParkActivity extends AppCompatActivity {
         view = (ParkContract.View) getSupportFragmentManager()
                 .findFragmentById(R.id.parkFragment);
 
-        presenter =  new ParkPresenter(view,getApplicationContext());
+        presenter =  new ParkPresenter(view);
+        view.setPresenter(presenter);
+
         presenter.loadVehicles();
     }
 }
