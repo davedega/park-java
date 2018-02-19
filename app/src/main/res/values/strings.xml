@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">parkjava</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="not_found">Not Found</string>
+    <string name="try_again">Try again</string>
+
+    <string name="last_update">Last update %1$s</string>
+
+
+    <string name="vehicle_id">Vehicle Id</string>
+    <string name="vrn">VRN</string>
+    <string name="country">Country</string>
+    <string name="color">Color</string>
+    <string name="type">Type</string>
+    <string name="_default">Default</string>
+    <string name="no_details_for_this_car">No details for this car</string>
+
+
 </resources>

@@ -25,4 +25,33 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Gson for serialization/deserialization
+    implementation('com.google.code.gson:gson:2.8.2')
+
+    // Retrofit for web api interface
+    // http://square.github.io/retrofit/
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+
+    // RxJava for reactive functional programming
+    // https://github.com/ReactiveX/RxJava
+    // https://github.com/ReactiveX/RxAndroid
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    // Recycler View from Design Support Library
+    implementation 'com.android.support:design:26.1.0'
+    // ButterKnife for views injection
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+
+    // Required -- JUnit 4 framework
+    testCompile 'junit:junit:4.12'
+    // Optional -- Mockito framework
+    testCompile 'org.mockito:mockito-core:2.7.13'
+
 }
