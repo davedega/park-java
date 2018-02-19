@@ -19,3 +19,5 @@ Establishing an interface/protocol which coordinates the comunication between Vi
 
 *[Design Support Library](https://developer.android.com/training/material/design-library.html) to make use of the Recycler View
 
+*[Mockito](http://site.mockito.org/) mocking framework for unit tests in Java
+
