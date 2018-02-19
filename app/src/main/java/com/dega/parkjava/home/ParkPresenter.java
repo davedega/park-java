@@ -1,13 +1,17 @@
-package com.dega.parkjava;
+package com.dega.parkjava.home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
+import com.dega.parkjava.R;
 import com.dega.parkjava.api.ParkApi;
+import com.dega.parkjava.detail.ParkDetalActivity;
+import com.dega.parkjava.model.Constants;
+import com.dega.parkjava.model.Vehicle;
 import com.dega.parkjava.model.VehiclesResponse;
 
 import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,13 +28,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ParkPresenter implements ParkContract.Presenter {
 
+    private final Context context;
     private String API_BASE_URL = "http://private-6d86b9-vehicles5.apiary-mock.com/";
 
     private ParkContract.View view;
     private Retrofit retrofit;
 
-    ParkPresenter(ParkContract.View view) {
+    ParkPresenter(ParkContract.View view, Context context) {
         this.view = view;
+        this.context = context;
 
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -55,9 +61,9 @@ public class ParkPresenter implements ParkContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        if(e instanceof UnknownHostException){
+                        if (e instanceof UnknownHostException) {
                             view.showErrorMessage(R.string.no_internet_connection);
-                        }else if (e instanceof HttpException){
+                        } else if (e instanceof HttpException) {
                             view.showErrorMessage(R.string.not_found);
                         }
                     }
@@ -67,5 +73,21 @@ public class ParkPresenter implements ParkContract.Presenter {
                         view.showLastUpdate();
                     }
                 });
+    }
+
+    @Override
+    public void showDetailInNewView(Vehicle vehicle) {
+
+        Bundle extras = new Bundle();
+        extras.putInt(Constants.Data.VEHICLE_ID, vehicle.getVehicleId());
+        extras.putString(Constants.Data.VRN, vehicle.getVrn());
+        extras.putString(Constants.Data.COUNTRY, vehicle.getCountry());
+        extras.putString(Constants.Data.COLOR, vehicle.getColor());
+        extras.putString(Constants.Data.TYPE, vehicle.getType());
+        extras.putBoolean(Constants.Data.DEFAULT, vehicle.getDefault());
+
+        Intent detail = new Intent(context, ParkDetalActivity.class);
+        detail.putExtras(extras);
+        context.startActivity(detail);
     }
 }

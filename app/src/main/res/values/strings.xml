@@ -6,4 +6,14 @@
 
     <string name="last_update">Last update %1$s</string>
 
+
+    <string name="vehicle_id">Vehicle Id</string>
+    <string name="vrn">VRN</string>
+    <string name="country">Country</string>
+    <string name="color">Color</string>
+    <string name="type">Type</string>
+    <string name="_default">Default</string>
+    <string name="no_details_for_this_car">No details for this car</string>
+
+
 </resources>

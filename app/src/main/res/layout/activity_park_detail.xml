@@ -6,8 +6,8 @@
     tools:context="com.dega.parkjava.home.ParkActivity">
 
     <fragment
-        android:id="@+id/parkFragment"
-        android:name="com.dega.parkjava.home.ParkFragment"
+        android:id="@+id/parkDetailFragment"
+        android:name="com.dega.parkjava.detail.ParkDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
