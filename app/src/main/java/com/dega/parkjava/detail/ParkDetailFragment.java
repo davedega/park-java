@@ -8,7 +8,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dega.parkjava.R;
@@ -24,8 +23,6 @@ import butterknife.Unbinder;
 
 public class ParkDetailFragment extends Fragment implements ParkDetailContract.View {
 
-    private Unbinder unbinder;
-
     @BindView(R.id.vehicleIdTv)
     TextView vehicleIdTv;
     @BindView(R.id.vrnTv)
@@ -39,6 +36,7 @@ public class ParkDetailFragment extends Fragment implements ParkDetailContract.V
     @BindView(R.id.defaultSwitch)
     SwitchCompat defaultSwitch;
     View rootView;
+    private Unbinder unbinder;
     private ParkDetailPresenter presenter;
 
 
@@ -58,13 +56,13 @@ public class ParkDetailFragment extends Fragment implements ParkDetailContract.V
 
     @Override
     public void showErrorMessage(int message) {
-        Snackbar.make( rootView ,
+        Snackbar.make(rootView,
                 getString(R.string.no_details_for_this_car), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showVehicleDetail(Vehicle vehicle) {
-        vehicleIdTv.setText(""+vehicle.getVehicleId());
+        vehicleIdTv.setText("" + vehicle.getVehicleId());
         vrnTv.setText(vehicle.getVrn());
         countryTv.setText(vehicle.getCountry());
         colorTv.setText(vehicle.getColor());

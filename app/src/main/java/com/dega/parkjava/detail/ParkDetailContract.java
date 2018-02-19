@@ -1,7 +1,5 @@
 package com.dega.parkjava.detail;
 
-import android.os.Bundle;
-
 import com.dega.parkjava.model.Vehicle;
 
 /**

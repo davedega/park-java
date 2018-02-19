@@ -1,7 +1,7 @@
 package com.dega.parkjava.home;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.dega.parkjava.R;
 
@@ -18,7 +18,7 @@ public class ParkActivity extends AppCompatActivity {
         view = (ParkContract.View) getSupportFragmentManager()
                 .findFragmentById(R.id.parkFragment);
 
-        presenter =  new ParkPresenter(view, getApplicationContext());
+        presenter = new ParkPresenter(view, getApplicationContext());
         view.setPresenter(presenter);
 
         presenter.loadVehicles();

@@ -11,6 +11,7 @@ public interface ParkContract {
     interface Presenter {
 
         void loadVehicles();
+
         //ANDR-300 select vehicle and show detail in new view
         void showDetailInNewView(Vehicle vehicle);
     }

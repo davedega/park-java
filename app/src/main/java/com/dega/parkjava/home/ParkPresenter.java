@@ -61,9 +61,9 @@ public class ParkPresenter implements ParkContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        if(e instanceof UnknownHostException){
+                        if (e instanceof UnknownHostException) {
                             view.showErrorMessage(R.string.no_internet_connection);
-                        }else if (e instanceof HttpException){
+                        } else if (e instanceof HttpException) {
                             view.showErrorMessage(R.string.not_found);
                         }
                     }
@@ -80,10 +80,10 @@ public class ParkPresenter implements ParkContract.Presenter {
 
         Bundle extras = new Bundle();
         extras.putInt(Constants.Data.VEHICLE_ID, vehicle.getVehicleId());
-        extras.putString(Constants.Data.VRN,vehicle.getVrn());
-        extras.putString(Constants.Data.COUNTRY,vehicle.getCountry());
-        extras.putString(Constants.Data.COLOR,vehicle.getColor());
-        extras.putString(Constants.Data.TYPE,vehicle.getType());
+        extras.putString(Constants.Data.VRN, vehicle.getVrn());
+        extras.putString(Constants.Data.COUNTRY, vehicle.getCountry());
+        extras.putString(Constants.Data.COLOR, vehicle.getColor());
+        extras.putString(Constants.Data.TYPE, vehicle.getType());
         extras.putBoolean(Constants.Data.DEFAULT, vehicle.getDefault());
 
         Intent detail = new Intent(context, ParkDetalActivity.class);
