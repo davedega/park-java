@@ -47,11 +47,17 @@ dependencies {
     // ButterKnife for views injection
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
-
+    
     // Required -- JUnit 4 framework
     testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework
     testCompile 'org.mockito:mockito-core:2.7.13'
+
+    // Dagger2 for dependency injection
+    // https://github.com/google/dagger
+    implementation 'com.google.dagger:dagger:2.13'
+    // to read the compiled files during build time and generate source code
+    // files to be used in the project.
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
 
 }

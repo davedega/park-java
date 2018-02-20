@@ -7,7 +7,7 @@ import com.dega.parkjava.R;
 
 public class ParkActivity extends AppCompatActivity {
 
-    ParkPresenter presenter;
+    ParkPresenterImpl presenter;
     ParkContract.View view;
 
     @Override
@@ -18,7 +18,7 @@ public class ParkActivity extends AppCompatActivity {
         view = (ParkContract.View) getSupportFragmentManager()
                 .findFragmentById(R.id.parkFragment);
 
-        presenter = new ParkPresenter(view, getApplicationContext());
+        presenter = new ParkPresenterImpl(view, getApplicationContext());
         view.setPresenter(presenter);
 
         presenter.loadVehicles();

@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.dega.parkjava.ParkApplication;
 import com.dega.parkjava.R;
-import com.dega.parkjava.api.ParkApi;
 import com.dega.parkjava.detail.ParkDetalActivity;
+import com.dega.parkjava.infrastructure.ApiManager;
 import com.dega.parkjava.model.Constants;
 import com.dega.parkjava.model.Vehicle;
 import com.dega.parkjava.model.VehiclesResponse;
 
 import java.net.UnknownHostException;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -19,37 +22,29 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by davedega on 17/02/18.
  */
 
-public class ParkPresenter implements ParkContract.Presenter {
+public class ParkPresenterImpl implements ParkContract.Presenter {
 
-    private final Context context;
-    private String API_BASE_URL = "http://private-6d86b9-vehicles5.apiary-mock.com/";
+    @Inject
+    ApiManager apiManager;
 
+    private Context context;
     private ParkContract.View view;
-    private Retrofit retrofit;
 
-    ParkPresenter(ParkContract.View view, Context context) {
+    ParkPresenterImpl(ParkContract.View view, Context context) {
         this.view = view;
         this.context = context;
-
-        retrofit = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(API_BASE_URL)
-                .build();
+        ParkApplication.getComponent().inject(this);
     }
 
     @Override
     public void loadVehicles() {
-        ParkApi parkApi = retrofit.create(ParkApi.class);
 
-        Observable<VehiclesResponse> vehicleClient = parkApi.loadVehicles();
+        Observable<VehiclesResponse> vehicleClient = apiManager.getApiService().loadVehicles();
 
         vehicleClient.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
