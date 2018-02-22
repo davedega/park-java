@@ -1,6 +1,7 @@
 # park-java
 
-Android Java project for Parkmobile which consumes JSON data from an API endpoint .
+Android Java project for Parkmobile which consumes JSON data from an API endpoint.
+To ensure the quality of the project it has been unit tested succesfuly
 
 ## Architecture 
 
