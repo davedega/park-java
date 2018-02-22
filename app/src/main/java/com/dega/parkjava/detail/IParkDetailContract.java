@@ -5,10 +5,12 @@ import com.dega.parkjava.model.Vehicle;
 /**
  * Created by davedega on 18/02/18.
  */
+interface IParkDetailContract {
 
-interface ParkDetailContract {
     interface Presenter {
+
         void loadDetailVehicle(Vehicle vehicle);
+
     }
 
     interface View {
@@ -17,6 +19,6 @@ interface ParkDetailContract {
 
         void showVehicleDetail(Vehicle vehicle);
 
-        void setPresenter(ParkDetailPresenter presenter);
+        void setPresenter(ParkDetailPresenterImpl presenter);
     }
 }

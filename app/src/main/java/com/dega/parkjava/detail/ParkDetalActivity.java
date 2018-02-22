@@ -12,20 +12,19 @@ import com.dega.parkjava.model.Vehicle;
  */
 public class ParkDetalActivity extends AppCompatActivity {
 
-    ParkDetailPresenter presenter;
-    ParkDetailContract.View view;
+    ParkDetailPresenterImpl presenter;
+    IParkDetailContract.View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_detail);
 
-        view = (ParkDetailContract.View) getSupportFragmentManager()
+        view = (IParkDetailContract.View) getSupportFragmentManager()
                 .findFragmentById(R.id.parkDetailFragment);
 
-        presenter = new ParkDetailPresenter(view);
+        presenter = new ParkDetailPresenterImpl(view);
         view.setPresenter(presenter);
-
         presenter.loadDetailVehicle(vehicleFromBundle(getIntent().getExtras()));
     }
 

@@ -24,6 +24,9 @@ public interface ParkContract {
 
         void showErrorMessage(int message);
 
+        void showErrorMessage(String message);
+
+
         void showLastUpdate();
     }
 }

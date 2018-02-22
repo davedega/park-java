@@ -7,10 +7,11 @@ import com.dega.parkjava.model.Vehicle;
 /**
  * Created by davedega on 18/02/18.
  */
-public class ParkDetailPresenter implements ParkDetailContract.Presenter {
-    private final ParkDetailContract.View view;
+public class ParkDetailPresenterImpl implements IParkDetailContract.Presenter {
 
-    ParkDetailPresenter(ParkDetailContract.View view) {
+    private final IParkDetailContract.View view;
+
+    ParkDetailPresenterImpl(IParkDetailContract.View view) {
         this.view = view;
     }
 
