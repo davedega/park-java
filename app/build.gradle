@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.dega.parkjava"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
     }
 }
 
@@ -29,35 +38,58 @@ dependencies {
     // Gson for serialization/deserialization
     implementation('com.google.code.gson:gson:2.8.2')
 
-    // Retrofit for web api interface
-    // http://square.github.io/retrofit/
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-
-    // RxJava for reactive functional programming
-    // https://github.com/ReactiveX/RxJava
-    // https://github.com/ReactiveX/RxAndroid
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
+//    // Retrofit for web api interface
+//    // http://square.github.io/retrofit/
+//    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+//    implementation "com.squareup.retrofit2:adapter-rxjava:2.1.0"
+////    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:2.0.0"
+//
+//    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+//
+//    // RxJava for reactive functional programming
+//    // https://github.com/ReactiveX/RxJava
+//    // https://github.com/ReactiveX/RxAndroid
+//    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//
     // Recycler View from Design Support Library
-    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:design:27.0.2'
     // ButterKnife for views injection
-    implementation 'com.jakewharton:butterknife:8.8.1'
+//    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    
-    // Required -- JUnit 4 framework
-    testCompile 'junit:junit:4.12'
-    // Optional -- Mockito framework
-    testCompile 'org.mockito:mockito-core:2.7.13'
 
-    // Dagger2 for dependency injection
-    // https://github.com/google/dagger
-    implementation 'com.google.dagger:dagger:2.13'
-    // to read the compiled files during build time and generate source code
-    // files to be used in the project.
     annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+
+    // Rx java
+    compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
+    compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit"
+    compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.retrofit2rxjava2adapter"
+
+    // OkHttp
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
+    testCompile "com.squareup.okhttp3:mockwebserver:$rootProject.okhttp"
+
+    //Dagger
+    compile "com.google.dagger:dagger:$rootProject.dagger"
+    compile "com.google.dagger:dagger-android:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+
+    // Butter knife
+    compile "com.jakewharton:butterknife:$rootProject.butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
+
+    // Mockito
+    testCompile "org.mockito:mockito-core:$rootProject.mockito"
+
+    // AssertJ
+    testCompile "org.assertj:assertj-core:$rootProject.assertj"
 
 }

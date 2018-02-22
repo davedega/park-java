@@ -25,3 +25,16 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+ext {
+
+    butterknife = '8.4.0'
+    retrofit = '2.1.0'
+    retrofit2rxjava2adapter = '1.0.0'
+    rxjavaVersion = '1.1.8'
+    rxandroidVersion = '1.2.1'
+    okhttp = '3.3.1'
+    dagger = '2.10'
+    mockito = '1.10.19'
+    assertj = '2.7.0'
+    constraint = '1.0.2'
+}

@@ -1,5 +1,6 @@
 package com.dega.parkjava.infrastructure;
 
+import com.dega.parkjava.home.ParkActivity;
 import com.dega.parkjava.home.ParkPresenterImpl;
 
 import javax.inject.Singleton;
@@ -12,7 +13,11 @@ import dagger.Component;
 @Singleton
 @Component(modules = ParkModule.class)
 public interface ParkComponent {
+
     void inject(ParkPresenterImpl presenter);
+
+    void inject(ParkActivity activity);
+
 }
 
 

@@ -4,24 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.dega.parkjava.ParkApplication;
 import com.dega.parkjava.R;
+import com.dega.parkjava.api.ApiService;
 import com.dega.parkjava.detail.ParkDetalActivity;
-import com.dega.parkjava.infrastructure.ApiManager;
+import com.dega.parkjava.infrastructure.schedulers.BaseSchedulerProvider;
 import com.dega.parkjava.model.Constants;
 import com.dega.parkjava.model.Vehicle;
 import com.dega.parkjava.model.VehiclesResponse;
 
 import java.net.UnknownHostException;
 
-import javax.inject.Inject;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Observable;
+import rx.Observer;
+import rx.subscriptions.CompositeSubscription;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.HttpException;
-import retrofit2.Retrofit;
 
 /**
  * Created by davedega on 17/02/18.
@@ -29,29 +26,37 @@ import retrofit2.Retrofit;
 
 public class ParkPresenterImpl implements ParkContract.Presenter {
 
-    @Inject
-    ApiManager apiManager;
 
-    private Context context;
-    private ParkContract.View view;
+    private final ApiService apiService;
+    private final BaseSchedulerProvider schedulerProvider;
+    private final ParkContract.View view;
+    private final Context context;
+    private final CompositeSubscription subscriptions;
 
-    ParkPresenterImpl(ParkContract.View view, Context context) {
+
+    ParkPresenterImpl(ApiService apiService, BaseSchedulerProvider schedulerProvider,
+                      ParkContract.View view, Context context) {
         this.view = view;
         this.context = context;
-        ParkApplication.getComponent().inject(this);
+        this.apiService = apiService;
+        this.schedulerProvider = schedulerProvider;
+        subscriptions = new CompositeSubscription();
+
+//        ParkApplication.getComponent().inject(this);
     }
 
     @Override
     public void loadVehicles() {
 
-        Observable<VehiclesResponse> vehicleClient = apiManager.getApiService().loadVehicles();
+        Observable<VehiclesResponse> vehicleClient = apiService.loadVehicles();
 
-        vehicleClient.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<VehiclesResponse>() {
+        vehicleClient
+                .subscribeOn(schedulerProvider.computation())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(new Observer<VehiclesResponse>() {
                     @Override
-                    public void onNext(VehiclesResponse vehiclesResponse) {
-                        view.showVehiclesInList(vehiclesResponse);
+                    public void onCompleted() {
+                        view.showLastUpdate();
                     }
 
                     @Override
@@ -60,12 +65,15 @@ public class ParkPresenterImpl implements ParkContract.Presenter {
                             view.showErrorMessage(R.string.no_internet_connection);
                         } else if (e instanceof HttpException) {
                             view.showErrorMessage(R.string.not_found);
+                        }else{
+                            view.showErrorMessage(R.string.expection_message);
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-                        view.showLastUpdate();
+                    public void onNext(VehiclesResponse vehiclesResponse) {
+                        view.showVehiclesInList(vehiclesResponse);
+
                     }
                 });
     }
