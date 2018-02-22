@@ -27,6 +27,18 @@ public class Vehicle {
     @Expose
     private Boolean _default;
 
+    public Vehicle() {
+    }
+
+    public Vehicle(Integer vehicleId, String vrn, String country, String color, String type, Boolean _default) {
+        this.vehicleId = vehicleId;
+        this.vrn = vrn;
+        this.country = country;
+        this.color = color;
+        this.type = type;
+        this._default = _default;
+    }
+
     public Integer getVehicleId() {
         return vehicleId;
     }

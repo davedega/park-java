@@ -90,6 +90,22 @@ public class ParkFragment extends Fragment implements ParkContract.View {
     }
 
     @Override
+    public void showErrorMessage(String message) {
+        logoImageView.setVisibility(View.VISIBLE);
+        vehiclesList.setVisibility(View.GONE);
+        Snackbar mySnackbar = Snackbar.make(logoImageView,
+                message, Snackbar.LENGTH_SHORT);
+        mySnackbar.setAction(R.string.try_again, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.loadVehicles();
+            }
+        });
+
+        mySnackbar.show();
+    }
+
+    @Override
     public void showLastUpdate() {
         Date date = new Date();
         String stringDate = DateFormat.getTimeInstance(DateFormat.SHORT).format(date);

@@ -21,7 +21,7 @@ import butterknife.Unbinder;
  * Created by davedega on 18/02/18.
  */
 
-public class ParkDetailFragment extends Fragment implements ParkDetailContract.View {
+public class ParkDetailFragment extends Fragment implements IParkDetailContract.View {
 
     @BindView(R.id.vehicleIdTv)
     TextView vehicleIdTv;
@@ -37,7 +37,7 @@ public class ParkDetailFragment extends Fragment implements ParkDetailContract.V
     SwitchCompat defaultSwitch;
     View rootView;
     private Unbinder unbinder;
-    private ParkDetailPresenter presenter;
+    private ParkDetailPresenterImpl presenter;
 
 
     @Nullable
@@ -71,7 +71,7 @@ public class ParkDetailFragment extends Fragment implements ParkDetailContract.V
     }
 
     @Override
-    public void setPresenter(ParkDetailPresenter presenter) {
+    public void setPresenter(ParkDetailPresenterImpl presenter) {
         this.presenter = presenter;
     }
 }
